@@ -23,7 +23,7 @@ public class OrderRequest {
 		String dateString = order.getCreatedDateTime().toString();
 		JSONObject jo = new JSONObject();
 		jo.put("id", order.getId());
-		jo.put("currentDateTime", dateString);
+		jo.put("createdDateTime", dateString);
 		jo.put("currencyPair", order.getCurrencyPair());
 		jo.put("type", order.getType().toString());
 		jo.put("price", order.getPrice());
@@ -71,7 +71,7 @@ public class OrderRequest {
 		
 		jo.put("id", trade.getId());
 		jo.put("buyOrderId", trade.getBuyOrder().getId());
-		jo.put("sellOrderID", trade.getSellOrder().getId());
+		jo.put("sellOrderId", trade.getSellOrder().getId());
 		jo.put("timestamp", trade.getCreatedDateTime().getTime());
 		jo.put("price", trade.getPrice());
 		jo.put("quantity", trade.getQuantity());
@@ -220,7 +220,7 @@ public class OrderRequest {
 			}
 				orderBookElement.setQuantity(orderBookElement.getQuantity() - givenSum);
 				if(orderBookElement.getQuantity() < 0.005) orderBookElementList.remove(0);
-				System.out.println(orderBookElement.getQuantity());
+				//System.out.println(orderBookElement.getQuantity());
 			}
 			else break;
 		}
