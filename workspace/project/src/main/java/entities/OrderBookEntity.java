@@ -1,10 +1,14 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -15,11 +19,13 @@ public class OrderBookEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@OneToMany(targetEntity = OrderEntity.class)
-	private List<OrderEntity> buyOrders;
+	@ElementCollection
+	@OrderBy("price DESC")
+	private List<OrderBookElement> buyOrders = new ArrayList<>();
 	
-	@OneToMany(targetEntity = OrderEntity.class)
-	private List<OrderEntity> sellOrders;
+	@ElementCollection
+	@OrderBy("price ASC")
+	private List<OrderBookElement> sellOrders = new ArrayList<>();
 
 	public OrderBookEntity()
 	{
@@ -34,19 +40,19 @@ public class OrderBookEntity {
 		this.id = id;
 	}
 
-	public List<OrderEntity> getBuyOrders() {
+	public List<OrderBookElement> getBuyOrders() {
 		return buyOrders;
 	}
 
-	public void setBuyOrders(List<OrderEntity> buyOrders) {
+	public void setBuyOrders(List<OrderBookElement> buyOrders) {
 		this.buyOrders = buyOrders;
 	}
 
-	public List<OrderEntity> getSellOrders() {
+	public List<OrderBookElement> getSellOrders() {
 		return sellOrders;
 	}
 
-	public void setSellOrders(List<OrderEntity> sellOrders) {
+	public void setSellOrders(List<OrderBookElement> sellOrders) {
 		this.sellOrders = sellOrders;
 	}
 	

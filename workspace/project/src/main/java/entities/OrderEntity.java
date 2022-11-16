@@ -1,8 +1,10 @@
 package entities;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,13 +14,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.data.jpa.repository.Query;
+
 import entities.utilities.Status;
 import entities.utilities.Type;
-
-
+import org.springframework.data.repository.query.Param;
 
 @Entity
 public class OrderEntity {
+	
+
 	
 	public static final String fixedCurrencyPair = "BTCUSD";
 	
@@ -76,11 +81,18 @@ public class OrderEntity {
 	private Status status;
 	
 	
-	@OneToMany(mappedBy = "buyOrder")
-	private List<TradeEntity> buyTrades;
+	@OneToMany(mappedBy = "buyOrder", cascade = CascadeType.ALL)
+	private List<TradeEntity> buyTrades = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "sellOrder")
-	private List<TradeEntity> sellTrades;
+	
+	@OneToMany(mappedBy = "sellOrder", cascade = CascadeType.ALL)
+	private List<TradeEntity> sellTrades = new ArrayList<>();
+	
+	public void decreaseQuantity(Double quantity)
+	{
+		this.quantity -= quantity;
+		this.filledQuantity += quantity;
+	}
 	
 	public List<TradeEntity> getBuyTrades() {
 		return buyTrades;

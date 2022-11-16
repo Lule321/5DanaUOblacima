@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class TradeEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = {CascadeType.PERSIST})
 	private OrderEntity buyOrder;
 	
 	public TradeEntity(OrderEntity buyOrder, OrderEntity sellOrder, Double price, Double quantity) {
@@ -33,7 +34,7 @@ public class TradeEntity {
 	{
 		super();
 	}
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = {CascadeType.PERSIST})
 	private OrderEntity sellOrder;
 	
 	@Column(nullable = false)
