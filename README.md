@@ -12,6 +12,7 @@ Koriscene tehnologije:
    - Java verzija 11 (za Spring Boot, ja sam koristion 11.0.11)
 
 Pokretanje projekta:
+
     Preko eclipse sa projekat lako pokrece, naime treba naci klasu ProjectApplication i pokrenuti je bilo kao Spring project ili kao java aplikaciju. Projekat sam generise bazu podataka.
 
     Sa vasom bazom se povezujete tako sto u application.properties fajlu promenite port ako je potrebno (stoji 3306), i promenite spring.datasource.username i spring.datasource.password u Vas username i password.
@@ -21,6 +22,7 @@ Pokretanje projekta:
     Ako stignem, mozda napisem kako se pokrece bez eclipse-a.
 
 Napomene:
+
     Projekat nije konkurentan, te ce vise paralelnih zahteva verovatno generisati gresku u bazi podataka (race condition). Nisam stigao ovo da odradim. Za testiranje nisam testirao view-ove, nego klasu odgovornu za algoritam ubacivanja Order-a. Nisam skroz zavrsio njeno testiranje, ali je vecina gotova.
 
 Struktura projekta:
