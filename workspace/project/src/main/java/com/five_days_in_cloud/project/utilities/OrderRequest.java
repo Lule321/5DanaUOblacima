@@ -132,6 +132,7 @@ public class OrderRequest {
 				TradeEntity te = tradeIncomingBuyOrder(order, o);
 				order.getBuyTrades().add(te);
 				allOrdersToBeUpdated.add(o);
+				givenSum += te.getQuantity();
 				if(order.getQuantity() < 0.005) break;
 			}
 				orderBookElement.setQuantity(orderBookElement.getQuantity() - givenSum);
@@ -181,7 +182,7 @@ public class OrderRequest {
 				break;
 			}
 			
-			else if(orderBookElementList.get(i).getPrice() > order.getPrice())
+			else if(orderBookElementList.get(i).getPrice() < order.getPrice())
 			{
 				OrderBookElement newOrderBookElement = new OrderBookElement(order.getPrice(), order.getQuantity());
 				orderBookElementList.add(i, newOrderBookElement);
@@ -264,7 +265,7 @@ public class OrderRequest {
 				orderBookElementList.get(i).setQuantity(orderBookElementList.get(i).getQuantity() + order.getQuantity());
 				break;
 			}
-			else if(orderBookElementList.get(i).getPrice() < order.getPrice())
+			else if(orderBookElementList.get(i).getPrice() > order.getPrice())
 			{
 				OrderBookElement newOrderBookElement = new OrderBookElement(order.getPrice(), order.getQuantity());
 				orderBookElementList.add(i, newOrderBookElement);
